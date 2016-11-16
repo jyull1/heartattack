@@ -23,11 +23,11 @@ class Person {
 	getStandards(){ return this.standards; }
 	getAffection(){ return this.affection; }
 	// setting and changing stats
-	ChangeCharm(int){ this.charm = int; }
-	ChangeWit(int){ this.wit = int; }
+	ChangeCharm(int){ this.charm += int; }
+	ChangeWit(int){ this.wit += int; }
 	ChangeIntel(int){ this.intel = int; }
-	ChangeStandards(int){ this.standards = int; }
-	ChangeAffection(int){ this.affection = int; }
+	ChangeStandards(int){ this.standards += int; }
+	ChangeAffection(int){ this.affection += int; }
 }
 
 var obj = {
