@@ -1,5 +1,6 @@
 class attack {
-	constructor(obj, player){
+	constructor(name, player){
+		var obj = find(name, templates)
 		this.name = obj.name;
 		this.effect = obj.effect;
 		this.bools = obj.bools;
@@ -67,4 +68,13 @@ var templates = [
 //Miscellaneous functions go here
 function random(min, max){
 	return Math.random()*(max-min) + min;
+}
+
+function find(name, arr){
+	for(i in arr){
+		if(arr[i].name === name){
+			return arr[i];
+		}
+	}
+	return -1;
 }
