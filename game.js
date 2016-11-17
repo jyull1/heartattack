@@ -4,3 +4,5 @@ var gameWidth = 1280,
 var game = new Phaser.Game(gameWidth, gameHeight);
 
 game.state.add('date', date);
+
+game.state.start('date', date);
