@@ -4,11 +4,10 @@ var date = {
 	},
 
 	create: function(){
-		console.log('Tweet');
 		this.bg = game.add.image(0, 0, 'background');
 	},
 
 	update: function(){
 
 	}
-};
+}
