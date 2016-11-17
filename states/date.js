@@ -1,6 +1,6 @@
 var date = {
 	preload: function(){
-		game.load.image('background', '/assets/backgrounds/background_left_(v1).png');
+		game.load.image('background', '/assets/backgrounds/final_bg_left.png');
 	},
 
 	create: function(){
