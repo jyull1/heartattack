@@ -12,6 +12,10 @@ class Person {
 		this.standards = obj.standards;
 		// affection will work as your health gauge if it fills up, you lose.
 		this.affecton = obj.affection;
+		//Array of the player's attacks, or rather the string keys that will be used for lookup.
+		this.attacks = [];
+		//The quirk object
+		this.quirk = {};
 	}
 
 	// this player is given the other player class, maiking it aware of its existence
