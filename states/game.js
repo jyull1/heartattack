@@ -3,6 +3,10 @@ var gameWidth = 1280,
 
 var game = new Phaser.Game(gameWidth, gameHeight);
 
-game.state.add('date', date);
+game.state.add('charMenu', charMenu);
 
-game.state.start('date', date);
+game.state.start('charMenu', charMenu);
+
+//game.state.add('date', date);
+
+//game.state.start('date', date);
