@@ -7,6 +7,40 @@ console.log(characters);
 var textName;
 var textAttacks;
 var style;
+var leftButt, rightButt;
+var curIndex = 0;
+
+function displayChar(charIn){
+        textName.setText(charIn.name);
+        var printText = "";
+        for(var i = 0; i < charIn.attacks.length; i++){
+            printText += charIn.attacks[i].name+"\n";
+            printText += " ";
+        }
+        textAttacks.setText(printText);
+    
+    }    
+function charLeft(idx){
+    if (idx>0){
+        curIndex = idx-1;
+        displayChar(characters[idx-1]);
+    }else{
+        curIndex=characters.length-1;
+        displayChar(characters[characters.length-1]);
+    }
+    
+}
+
+function charRight(idx){
+    if (idx<characters.length-1){
+        curIndex = idx+1;
+        displayChar(characters[idx+1]);   
+    }else{
+        curIndex=0;
+        displayChar(characters[0]);
+    }
+    
+}
 
 var charMenu = {
     
@@ -18,22 +52,39 @@ var charMenu = {
 		this.bg = game.add.image(0, 0, 'background');
         
         style = {font: "bold 32px Arial", fill: "#000"};
+        textName = game.add.text(210, 250, "", style);
+        textAttacks = game.add.text(500, 150, "", style);
+        
+        var leftInfo = {
+			x: 190,
+			y: 300,
+			key: 'button',
+			func: () => charLeft(curIndex),
+			context: this,
+			text: "left"
+		}
+
+		leftButt = new Button(leftInfo);
+        
+        var rightInfo = {
+			x: 230,
+			y: 300,
+			key: 'button',
+			func: () => charRight(curIndex),
+			context: this,
+			text: "right"
+		}
+
+		rightButt = new Button(rightInfo);
+        
+        displayChar(characters[curIndex]);
 	},
+    
+    
 
 	update: function(){
         
-     function displayChar(charIn){
-        textName = game.add.text(230, 300, charIn.name, style);
-        var printText = "";
-        for(var i = 0; i < charIn.attacks.length; i++){
-            printText += charIn.attacks[i].name;
-            printText += " ";
-        }
-        textAttacks = game.add.text(0, 100, printText, style);
-    
-    }    
-        
-        displayChar(characters[0]);
+        //displayChar(characters[0]);
 	}
     
    
