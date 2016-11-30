@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var playerPosX = 0,
 	playerPosY = 0;
 
@@ -17,16 +16,10 @@ var date = {
 		game.load.image('background', '/assets/backgrounds/final_bg_left.png');
 		game.load.image('button', '/assets/ui/buttons.png');
 		game.load.image('panel', 'assets/ui/command_box_2.png');
-=======
-var date = {
-	preload: function(){
-		game.load.image('background', '/assets/backgrounds/final_bg_left.png');
->>>>>>> master
 	},
 
 	create: function(){
 		this.bg = game.add.image(0, 0, 'background');
-<<<<<<< HEAD
 
 		this.makeUI();
 
@@ -41,13 +34,10 @@ var date = {
 		this.player2.sprite.scale.setTo(0.5);
 
 		this.player1.sprite.sendToBack();
-=======
->>>>>>> master
 	},
 
 	update: function(){
 
-<<<<<<< HEAD
 	},
 
 	makeUI: function(){
@@ -89,7 +79,5 @@ var date = {
 				}
 			]
 		});
-=======
->>>>>>> master
 	}
 }
