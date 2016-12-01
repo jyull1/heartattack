@@ -53,26 +53,26 @@ var charMenu = {
         
         style = {font: "bold 32px Arial", fill: "#000"};
         textName = game.add.text(210, 250, "", style);
-        textAttacks = game.add.text(500, 150, "", style);
+        textAttacks = game.add.text(500, 180, "", style);
         
         var leftInfo = {
-			x: 190,
-			y: 300,
-			key: 'button',
+			x: 160,
+			y: 600,
+			//key: 'button',
 			func: () => charLeft(curIndex),
 			context: this,
-			text: "left"
+			text: "<"
 		}
 
 		leftButt = new Button(leftInfo);
         
         var rightInfo = {
-			x: 230,
-			y: 300,
-			key: 'button',
+			x: 260,
+			y: 600,
+			//key: 'button',
 			func: () => charRight(curIndex),
 			context: this,
-			text: "right"
+			text: ">"
 		}
 
 		rightButt = new Button(rightInfo);
