@@ -1,4 +1,7 @@
 class attack {
+	//Constrcutor takes 2 arguments:
+	//A String that corresponds to the attack in the attacks array.
+	//A reference to the person object to which the attack belongs.
 	constructor(name, player){
 		var obj = find(name, templates)
 		this.name = obj.name;
