@@ -11,9 +11,9 @@ var samplePlayer = {
 
 var date = {
 	preload: function(){
-		game.load.image('hipster', '/assets/hipster/hipster_1_left_white.png');
-		game.load.image('nerd', '/assets/nerd/nerd_1_left_white.png');
-		game.load.image('background', '/assets/backgrounds/final_bg_left.png');
+		game.load.image('hipster', '/assets/hipster/final_hipster_pose1_right.png');
+		game.load.image('nerd', '/assets/nerd/final_nerd_pose1_right.png');
+		game.load.image('background', '/assets/backgrounds/background_980x720_flip.png');
 		game.load.image('button', '/assets/ui/buttons.png');
 		game.load.image('panel', 'assets/ui/command_box_2.png');
 		game.load.image('heart_right', 'assets/ui/heart_right.png');
@@ -28,13 +28,13 @@ var date = {
 
 		this.player2 = {affection: 389};
 
-		this.player1.sprite = game.add.sprite(170, 145, 'hipster');
-		this.player1.sprite.scale.setTo(0.5);
+		this.player1.sprite = game.add.sprite(150, 145, 'hipster');
+		this.player1.sprite.scale.setTo(0.8);
 
-		this.player2.sprite  = game.add.sprite(170, 65, 'nerd');
-		this.player2.sprite.scale.setTo(0.5);
+		this.player2.sprite  = game.add.sprite(125, 92, 'nerd');
+		this.player2.sprite.scale.setTo(0.8);
 
-		this.player1.sprite.sendToBack();
+		this.player2.sprite.sendToBack();
 
 		this.makeUI();
 	},
@@ -46,7 +46,7 @@ var date = {
 	makeUI: function(){
 
 		this.panel = new Panel({
-			x: 1280,
+			x: 980,
 			y: 0,
 			cols: 1,
 			buttons: [
