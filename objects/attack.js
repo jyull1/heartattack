@@ -175,7 +175,6 @@ var templates = [
 		name: "Remember who you are...",
 		trope: "hipster",
 		effect: function(){
-<<<<<<< HEAD
 			this.player.changeStandards(+20);
 			this.player.changeInteligece(this.player.getInteligence() * 1.02);
 		},
@@ -191,10 +190,7 @@ var templates = [
 			var dmg = random(50, 100);
 			this.player.changeCharm(*1.05);
 			this.player.changeAffection(dmg);
-=======
-			var heal = random(50, 100);
-			this.player.changeAffection(-heal);
->>>>>>> e36c79d81af94110da236ee2b5a1f9f172241266
+
 		},
 		bools: {},
 		uses: 10,
