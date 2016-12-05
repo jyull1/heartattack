@@ -3,7 +3,11 @@ var menuState = {
 		game.load.image('left', 'Assets/UI/start_screen_left_weapons.png');
 		game.load.image('right', 'Assets/UI/start_screen_right_weapons.png');
 		game.load.image('background', 'Assets/UI/start_screen_bg.png');
+<<<<<<< HEAD
 		game.load.image('logo', 'Assets/UI/logo.png');
+=======
+		game.load.image('logo', 'Assets/heart_attack_logo_fixed.png');
+>>>>>>> a0f206256d8b00f972cae736e36580706d532e90
 		game.load.image('black', 'Assets/UI/black.png');
 		game.load.image('button', 'Assets/UI/buttons.png');
 	},
@@ -51,7 +55,11 @@ var menuState = {
             { font: "30px Georgia", fill: "#000000" });
 	},
 
+<<<<<<< HEAD
 	listener:function{
+=======
+	listener:function(){
+>>>>>>> a0f206256d8b00f972cae736e36580706d532e90
 		// make main game state call here
 	},
 
