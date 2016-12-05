@@ -9,8 +9,10 @@ var date = {
 		game.load.image('button', '/assets/ui/buttons.png');
 		game.load.image('panel', 'assets/ui/command_box_2.png');
 		game.load.image('heart_right', 'assets/ui/heart_right.png');
+		game.load.image('heart_left', 'assets/ui/heart_left.png');
 		game.load.image('meter_right', 'assets/ui/hpbar_health.png');
 		game.load.image('therm_right', 'assets/ui/hp_therm_right.png');
+		game.load.image('therm_left', 'assets/ui/hp_therm_left.png');
 	},
 
 	create: function(){
@@ -119,6 +121,13 @@ var date = {
 		this.otherPlayer.hpBar = game.add.group();
 		this.otherPlayer.affectionMeter = this.otherPlayer.hpBar.create(450,225, 'therm_right');
 		this.otherPlayer.hpBar.create(0,0,'heart_right');
+		this.otherPlayer.affectionFill = this.otherPlayer.hpBar.create(445,252, 'meter_right');
+		this.otherPlayer.affectionFill.scale.set(this.otherPlayer.affection/1000, 1);
+		this.otherPlayer.hpBar.scale.set(0.25,0.25);
+
+		this.activePlayer.hpBar = game.add.group();
+		this.otherPlayer.affectionMeter = this.otherPlayer.hpBar.create(850,600, 'therm_left');
+		this.otherPlayer.hpBar.create(800,600,'heart_left');
 		this.otherPlayer.affectionFill = this.otherPlayer.hpBar.create(445,252, 'meter_right');
 		this.otherPlayer.affectionFill.scale.set(this.otherPlayer.affection/1000, 1);
 		this.otherPlayer.hpBar.scale.set(0.25,0.25);
