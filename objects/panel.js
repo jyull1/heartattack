@@ -35,7 +35,11 @@ class Panel {
 				buttonX += 300;
 			}
 		}
+	}
 
-
+	kill(){
+		for(i in this.buttons){
+			this.buttons[i].destroy();
+		}
 	}
 }

@@ -3,6 +3,7 @@ class Button {
 	//obj is a config object that can contain the following parameters:
 	//x: its position (centered) on the x axis.
 	//y: its position (centered) on the y axis.
+	//attack: the attack object attached to the button, whose effect the button will instantiate.
 	//(optional)key: the image asset key for the button's texture. Defaults to "button"
 	//func: the function to be performed when the button is clicked.
 	//(optional) context: the context under which func is run. Defaults to the game context.
@@ -20,9 +21,17 @@ class Button {
 		this.buttonImg = game.add.button(this.x, this.y, this.key, this.func, this.context);
 		this.buttonImg.anchor.setTo(0.5,0.5);
 
+		if(obj.attack){
+			this.attack = obj.attack;
+		}
+
 		if(this.text){
 			this.buttonTxt = game.add.text(this.x, this.y, this.text);
 			this.buttonTxt.anchor.setTo(0.5,0.5);
 		}
+	}
+
+	destroy(){
+		this.buttonImg.destroy();
 	}
 }
