@@ -9,6 +9,7 @@ class Attack {
 		this.bools = obj.bools;
 		this.uses = obj.uses;
 		this.desc = obj.desc;
+		this.trope = obj.trope;
 		this.player = player;
 	}
 
@@ -45,8 +46,121 @@ var templates = [
 		desc: "Talk about all the local brands in your pantry - saving the environment is SO endearing! Deal great affection."
 	},
 
+
+	{
+		name: "Ex Pictures",
+		trope: "nerd",
+		effect: function(){
+			var heal = random(50, 100);
+			this.player.changeAffection(-heal);
+		},
+		bools: {},
+		uses: 10,
+		desc: "Remember how she hurt you last time. Lose fair affection."
+	},
+
+	{
+		name: "Dorky Laugh",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(100, 150);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 8,
+		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Dammage"
+	},
+
+	{
+		name: "Free IT Advice",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(150, 200);
+			this.player.changeAffection(dmg);
+			// 50-50 chance of the advice working and doing excellent damage
+		},
+		bools: {},
+		uses: 5,
+		desc: "Your date is having computer issues, you offer some advice that will help"
+	},
+
+	{
+		name: "Science Experiment",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(200, 250);
+			this.player.changeAffection(dmg);
+			// 20 percent chance of failure and damaging self
+		},
+		bools: {},
+		uses: 4,
+		desc: "Talk in depth about your research project, deals great dammage"
+	},
+
+	{
+		name: "Clean Glasses",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(200, 250);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 5,
+		desc: "You remove your glasses to clean them and reval your beautiful eyes that were once hidden, does great damage on first use"
+	},
+
+	{
+		name: "Robo-Nerd",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(100, 150);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 3,
+		desc: "Your emotional depth isn't stellar you block out emotion, raises standards by one and lowers your affection"
+	},
+
+	{
+		name: "Game Talk",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(100, 150);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 10,
+		desc: "you talk about that new game you have been playing recently, does less damage every other move"
+	},
+
+	{
+		name: "Tell Joke",
+		trope: "nerd",
+		effect: function(){
+			var dmg = random(50, 100);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 10,
+		desc: "You tell a joke to express your humor, charm increases by %5, deals poor affection"
+	},
+// ---------------------End Nerd Attacks ---------------------------
+// --------------------- Hipster Attacks ---------------------------
+	{
+		name: "chat",
+		trope: "hipster",
+		effect: function(){
+			var dmg = random(50, 100);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 10,
+		desc: "Your small talk is on point!"
+	},
+
 	{
 		name: "Conversational Shift",
+		trope: "hipster",
 		effect: function(){
 			this.player.changeCharm(1);
 		},
@@ -56,14 +170,64 @@ var templates = [
 	},
 
 	{
-		name: "Ex Pictures",
+		name: "Remember who you are...",
+		trope: "hipster",
 		effect: function(){
-			var heal = random(50, 100);
-			this.player.changeAffection(-heal);
+			this.player.changeStandards(+20);
+			this.player.changeInteligece(this.player.getInteligence() * 0.2);
+		},
+		bools: {},
+		uses: 3,
+		desc: "Sit back and evaluate your trendiness, Earn a 20% bonus to your standards"
+	},
+
+	{
+		name: "Tell Joke",
+		trope: "hipster",
+		effect: function(){
+			var dmg = random(50, 100);
+			this.player.changeCharm(this.player.getCharm()*0.2);
+			this.player.changeAffection(dmg);
+
 		},
 		bools: {},
 		uses: 10,
-		desc: "Remember how she hurt you last time. Lose fair affection."
+		desc: "You tell a joke to express your humor, charm increases 5%, you deal poor affection"
+	},
+
+	{
+		name: "Vegan",
+		trope: "hipster",
+		effect: function(){
+			this.player.changeCharm(this.player.getCharm);
+		},
+		bools: {},
+		uses: 2,
+		desc: "Make the case of Vegan diets' numerous benefits. Decrease your opponents Wit by 10%"
+	},
+
+	{
+		name: "socally Scourced",
+		trope: "hipster",
+		effect: function(){
+			var dmg = random(200, 250);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 5,
+		desc: "Talk about all the local brands in your pantry, saving the environment is so endearing! Deals great affection"
+	},
+
+	{
+		name: "Indie Bands",
+		trope: "hipster",
+		effect: function(){
+			var dmg = random(150, 200);
+			this.player.changeAffection(dmg);
+		},
+		bools: {},
+		uses: 4,
+		desc: "Discuss your collection of indie vinyls. Deal fair affection"
 	}
 ]
 
