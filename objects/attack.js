@@ -13,14 +13,12 @@ class Attack {
 	}
 
 	use(){
-		console.log(this);
 		if(this.uses > 0){
 			this.effect();
 			this.uses--;
 		}
 		else{
 			console.log("Attack has already been used too many times!");
-			console.log(this);
 		}
 	}
 }

@@ -36,7 +36,7 @@ var date = {
 			wit: 2,
 			intel: 8,
 			standards: 7,
-			affection: 0,
+			affection: 10,
 			attacks: ["Locally Sourced", "Conversational Shift", "Ex Pictures"]
 		});
 
@@ -126,11 +126,12 @@ var date = {
 		this.otherPlayer.hpBar.scale.set(0.25,0.25);
 
 		this.activePlayer.hpBar = game.add.group();
-		this.otherPlayer.affectionMeter = this.otherPlayer.hpBar.create(850,600, 'therm_left');
-		this.otherPlayer.hpBar.create(800,600,'heart_left');
-		this.otherPlayer.affectionFill = this.otherPlayer.hpBar.create(445,252, 'meter_right');
-		this.otherPlayer.affectionFill.scale.set(this.otherPlayer.affection/1000, 1);
-		this.otherPlayer.hpBar.scale.set(0.25,0.25);
+		this.activePlayer.affectionMeter = this.activePlayer.hpBar.create(1590,2395, 'therm_left');
+		this.activePlayer.hpBar.create(3000,2200,'heart_left');
+		this.activePlayer.affectionFill = this.activePlayer.hpBar.create(3130, 2451, 'meter_right');
+		this.activePlayer.affectionFill.scale.set(this.activePlayer.affection/1000, 1);
+		this.activePlayer.affectionFill.x -= this.activePlayer.affectionFill.width;
+		this.activePlayer.hpBar.scale.set(0.25,0.25);
 	},
 
 	//Causes the players to act upon one another, giving the proper order by wit.
