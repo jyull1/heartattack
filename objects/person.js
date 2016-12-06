@@ -31,27 +31,10 @@ class Person {
 	getStandards(){ return this.standards; }
 	getAffection(){ return this.affection; }
 	// setting and changing stats
-<<<<<<< HEAD:person.js
-	ChangeCharm(int){ this.charm += int; }
-	ChangeWit(int){ this.wit += int; }
-	ChangeIntel(int){ this.intel = int; }
-	ChangeStandards(int){ this.standards += int; }
-	ChangeAffection(int){ this.affection += int; }
-}
-
-var obj = {
-	opponent: null,
-	charm: 7,
-	wit: 5,
-	intel: 9,
-	standards: 7,
-	affection: 0,
-=======
 	setOpponent(player){this.opponent = player}
 	changeCharm(int){ this.charm += int; }
 	changeWit(int){ this.wit += int; }
 	changeIntel(int){ this.intel += int; }
 	changeStandards(int){ this.standards += int; }
 	changeAffection(int){ this.affection += int; }
->>>>>>> a0f206256d8b00f972cae736e36580706d532e90:objects/person.js
 }
