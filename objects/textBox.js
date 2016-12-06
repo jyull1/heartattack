@@ -26,6 +26,7 @@ class TextBox{
 	}
 
 	displayText(string, line){
+		this.hide();
 		this.writeSpace.rect(0,0,this.width, this.height * 0.2, `rgba(0,0,0,${this.alpha})`);
 		this.draw();
 		line++;

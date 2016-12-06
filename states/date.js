@@ -18,6 +18,8 @@ var date = {
 	create: function(){
 		this.activePlayer;
 		this.otherPlayer;
+		//The amount of time each step in the attack sequence takes.
+		this.moveTime = 5000;
 		this.movesChosen = 0;
 
 		this.bg = game.add.image(0, 0, 'background');
@@ -56,6 +58,9 @@ var date = {
 		//Keeps the players on the screen one at a time.
 		this.otherPlayer = this.player1;
 		this.setActivePlayer(this.player2);
+
+		this.textbox = new TextBox();
+		this.textbox.displayText("Hey", 0);
 	},
 
 	update: function(){
@@ -126,9 +131,9 @@ var date = {
 		this.otherPlayer.hpBar.scale.set(0.25,0.25);
 
 		this.activePlayer.hpBar = game.add.group();
-		this.activePlayer.affectionMeter = this.activePlayer.hpBar.create(1590,2395, 'therm_left');
-		this.activePlayer.hpBar.create(3000,2200,'heart_left');
-		this.activePlayer.affectionFill = this.activePlayer.hpBar.create(3130, 2451, 'meter_right');
+		this.activePlayer.affectionMeter = this.activePlayer.hpBar.create(1890,1895, 'therm_left');
+		this.activePlayer.hpBar.create(3300,1700,'heart_left');
+		this.activePlayer.affectionFill = this.activePlayer.hpBar.create(3430, 1951, 'meter_right');
 		this.activePlayer.affectionFill.scale.set(this.activePlayer.affection/1000, 1);
 		this.activePlayer.affectionFill.x -= this.activePlayer.affectionFill.width;
 		this.activePlayer.hpBar.scale.set(0.25,0.25);
