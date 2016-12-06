@@ -14,7 +14,6 @@ class Attack {
 	}
 
 	use(){
-		console.log(this);
 		if(this.uses > 0){
 			this.effect();
 			this.uses--;
@@ -54,7 +53,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var heal = random(50, 100);
-			this.player.changeAffection(-dmg);
+			this.player.changeAffection(-heal);
 		},
 		bools: {},
 		uses: 10,
@@ -176,7 +175,7 @@ var templates = [
 		trope: "hipster",
 		effect: function(){
 			this.player.changeStandards(+20);
-			this.player.changeInteligece(this.player.getInteligence() * 1.02);
+			this.player.changeInteligece(this.player.getInteligence() * 0.2);
 		},
 		bools: {},
 		uses: 3,
@@ -188,7 +187,7 @@ var templates = [
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(50, 100);
-			this.player.changeCharm(*1.05);
+			this.player.changeCharm(this.player.getCharm()*0.2);
 			this.player.changeAffection(dmg);
 
 		},
@@ -201,7 +200,7 @@ var templates = [
 		name: "Vegan",
 		trope: "hipster",
 		effect: function(){
-			this.player.changeCharm(*1.10);
+			this.player.changeCharm(this.player.getCharm);
 		},
 		bools: {},
 		uses: 2,
@@ -230,10 +229,7 @@ var templates = [
 		bools: {},
 		uses: 4,
 		desc: "Discuss your collection of indie vinyls. Deal fair affection"
-	},
-
-// -------------------------- End Hipster Attacks ------------------------------
-}
+	}
 ]
 
 
