@@ -147,7 +147,7 @@ var templates = [
 // ---------------------End Nerd Attacks ---------------------------
 // --------------------- Hipster Attacks ---------------------------
 	{
-		name: "chat",
+		name: "Chat",
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(50, 100);
@@ -207,7 +207,7 @@ var templates = [
 	},
 
 	{
-		name: "socally Scourced",
+		name: "Socally Scourced",
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(200, 250);
