@@ -14,12 +14,14 @@ class Attack {
 	}
 
 	use(){
+		console.log(this);
 		if(this.uses > 0){
 			this.effect();
 			this.uses--;
 		}
 		else{
 			console.log("Attack has already been used too many times!");
+			console.log(this);
 		}
 	}
 }
@@ -52,7 +54,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var heal = random(50, 100);
-			this.player.changeAffection(-heal);
+			this.player.changeAffection(-dmg);
 		},
 		bools: {},
 		uses: 10,
@@ -64,21 +66,26 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var dmg = random(100, 150);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 8,
-		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Dammage"
+		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Damage"
 	},
 
 	{
 		name: "Free IT Advice",
 		trope: "nerd",
 		effect: function(){
-			var dmg = random(150, 200);
-			this.player.changeAffection(dmg);
-			// 50-50 chance of the advice working and doing excellent damage
-		},
+			var chan = random(0,100);
+			if (chan <= 50){
+				var dmg = random(100, 150);
+			}
+			else{
+				var dmg = random(200, 250);
+			}
+			this.player.getOpponent().changeAffection(dmg);
+			},
 		bools: {},
 		uses: 5,
 		desc: "Your date is having computer issues, you offer some advice that will help"
@@ -88,13 +95,18 @@ var templates = [
 		name: "Science Experiment",
 		trope: "nerd",
 		effect: function(){
-			var dmg = random(200, 250);
-			this.player.changeAffection(dmg);
-			// 20 percent chance of failure and damaging self
+			var chan = random(0,100);
+			if(chan <= 20){
+				this.player.changeAffection(100);
+			}
+			else{
+				var dmg = random(200, 250);
+				this.player.getOpponent().changeAffection(dmg);
+			}
 		},
 		bools: {},
 		uses: 4,
-		desc: "Talk in depth about your research project, deals great dammage"
+		desc: "Talk in depth about your research proeject, deals great damage"
 	},
 
 	{
@@ -102,7 +114,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var dmg = random(200, 250);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 5,
@@ -114,7 +126,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var dmg = random(100, 150);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 3,
@@ -126,7 +138,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var dmg = random(100, 150);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 10,
@@ -137,8 +149,13 @@ var templates = [
 		name: "Tell Joke",
 		trope: "nerd",
 		effect: function(){
-			var dmg = random(50, 100);
-			this.player.changeAffection(dmg);
+			if (player.getCharm()  > 5){
+				var dmg = random(100,150);
+			}
+			else{
+				var dmg = random(50, 100);
+			}
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 10,
@@ -151,7 +168,7 @@ var templates = [
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(50, 100);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 10,
@@ -173,8 +190,8 @@ var templates = [
 		name: "Remember who you are...",
 		trope: "hipster",
 		effect: function(){
-			this.player.changeStandards(+20);
-			this.player.changeInteligece(this.player.getInteligence() * 0.2);
+			this.player.changeStandards(1);
+			this.player.changeInteligece(1);
 		},
 		bools: {},
 		uses: 3,
@@ -186,8 +203,8 @@ var templates = [
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(50, 100);
-			this.player.changeCharm(this.player.getCharm()*0.2);
-			this.player.changeAffection(dmg);
+			this.player.changeCharm(1);
+			this.player.getOpponent().changeAffection(dmg);
 
 		},
 		bools: {},
@@ -199,7 +216,7 @@ var templates = [
 		name: "Vegan",
 		trope: "hipster",
 		effect: function(){
-			this.player.changeCharm(this.player.getCharm);
+			this.player.changeCharm(1);
 		},
 		bools: {},
 		uses: 2,
@@ -207,28 +224,18 @@ var templates = [
 	},
 
 	{
-		name: "Socally Scourced",
-		trope: "hipster",
-		effect: function(){
-			var dmg = random(200, 250);
-			this.player.changeAffection(dmg);
-		},
-		bools: {},
-		uses: 5,
-		desc: "Talk about all the local brands in your pantry, saving the environment is so endearing! Deals great affection"
-	},
-
-	{
 		name: "Indie Bands",
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(150, 200);
-			this.player.changeAffection(dmg);
+			this.player.getOpponent().changeAffection(dmg);
 		},
 		bools: {},
 		uses: 4,
 		desc: "Discuss your collection of indie vinyls. Deal fair affection"
-	}
+	},
+
+// -------------------------- End Hipster Attacks ------------------------------
 ]
 
 
