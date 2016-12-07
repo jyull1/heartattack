@@ -1,25 +1,101 @@
 var characters = [];
-var character1 = {name: "Nerd", attacks: [templates[1], templates[2]]};
-characters.push(character1);
-var character2 = {name: "Hipster", attacks: [templates[0]]};
-characters.push(character2);
-console.log(characters);
+characters.push("Nerd");
+characters.push("Hipster");
+
 var textName;
 var textAttacks;
 var style;
 var leftButt, rightButt;
 var curIndex = 0;
+var selectedMoves = ["test","test","test","test","test","test"]
 
-function displayChar(charIn){
-        textName.setText(charIn.name);
-        var printText = "";
-        for(var i = 0; i < charIn.attacks.length; i++){
-            printText += charIn.attacks[i].name+"\n";
-            printText += " ";
-        }
-        textAttacks.setText(printText);
+function displayChar(charName){
+        textName.setText(charName);
+        displayMoves(charName);
     
-    }    
+}
+
+function displayMoves(charName){
+    var tropeList = getTropeList(charName,templates);
+    var printText = "";
+    var startX = 200;
+    var startY = 150;
+        for(var i = 0; i < tropeList.length; i++){
+            var newX = startX;
+            var newY = startY + (70*i);
+            var name = tropeList[i].name;
+            var moveInfo = {
+                x: newX,
+                y: newY,
+                //key: 'button',
+                func: () => addToSelectedMoves(name,newX,newY),
+                context: this,
+                key: "attackButt1",
+                text: name
+		      }
+            var butt = new ButtonSimple(moveInfo);
+		    //var butt = new ButtonToggle(newX, newY,true,"attack1",name);
+        }
+    
+}
+
+function addToSelectedMoves(attackName, xIn, yIn){
+    for(var i = 0; i < selectedMoves.length; i++){
+        if(selectedMoves[i] == "test"){
+            selectedMoves[i] = attackName;
+            
+            var moveInfo = {
+			x: xIn,
+			y: yIn,
+			//key: 'button',
+			func: () => removeFromSelectedMoves(attackName,xIn,yIn),
+			context: this,
+            key: "attackButt2",
+			text: attackName
+            }
+            
+            var butt = new ButtonSimple(moveInfo);
+            //var butt = new ButtonToggle(xIn, yIn,false,"attack2",attackName);
+            return "";
+        }
+    }
+    
+    
+    return "Maximum six!";
+}
+
+function removeFromSelectedMoves(attackName, xIn, yIn){
+    for(var i = 0; i < selectedMoves.length; i++){
+        if(selectedMoves[i] == attackName){
+            selectedMoves[i] = "test";
+            
+            var moveInfo = {
+			x: xIn,
+			y: yIn,
+			//key: 'button',
+			func: () => addToSelectedMoves(attackName,xIn,yIn),
+			context: this,
+            key: "attackButt1",
+			text: attackName
+            }
+            
+            //var butt = new ButtonToggle(xIn, yIn,true,"attack1",attackName);
+            var butt = new ButtonSimple(moveInfo);
+            return "";
+        }
+    }
+    
+}
+
+function getTropeList(name, arr){
+    tropeList = [];
+	for(i in arr){
+		if(arr[i].trope === name.toLowerCase()){
+			tropeList.push(arr[i]);
+		}
+	}
+	return tropeList;
+}
 function charLeft(idx){
     if (idx>0){
         curIndex = idx-1;
@@ -27,8 +103,7 @@ function charLeft(idx){
     }else{
         curIndex=characters.length-1;
         displayChar(characters[characters.length-1]);
-    }
-    
+    }    
 }
 
 function charRight(idx){
@@ -38,25 +113,27 @@ function charRight(idx){
     }else{
         curIndex=0;
         displayChar(characters[0]);
-    }
-    
+    }    
 }
 
 var charMenu = {
     
 	preload: function(){
-		game.load.image('background', '/assets/backgrounds/charmenu.png');
+		game.load.image('background', '/assets/backgrounds/charSelect.png');
+        //game.load.image('attack1', '/assets/UI/attackButt.png');
+        game.load.image('attackButt1', '/assets/UI/attackButt1.png');
+        game.load.image('attackButt2', '/assets/UI/attackButt2.png');
 	},
 
 	create: function(){
 		this.bg = game.add.image(0, 0, 'background');
         
         style = {font: "bold 32px Arial", fill: "#000"};
-        textName = game.add.text(210, 250, "", style);
-        textAttacks = game.add.text(500, 180, "", style);
+        textName = game.add.text(605, 250, "", style);
+        textAttacks = game.add.text(100, 130, "", style);
         
         var leftInfo = {
-			x: 160,
+			x: 580,
 			y: 600,
 			//key: 'button',
 			func: () => charLeft(curIndex),
@@ -64,10 +141,10 @@ var charMenu = {
 			text: "<"
 		}
 
-		leftButt = new Button(leftInfo);
+		leftButt = new ButtonSimple(leftInfo);
         
         var rightInfo = {
-			x: 260,
+			x: 700,
 			y: 600,
 			//key: 'button',
 			func: () => charRight(curIndex),
@@ -75,15 +152,17 @@ var charMenu = {
 			text: ">"
 		}
 
-		rightButt = new Button(rightInfo);
+		rightButt = new ButtonSimple(rightInfo);
         
         displayChar(characters[curIndex]);
+        
+        
 	},
     
     
 
 	update: function(){
-        
+        //console.log(selectedMoves);
         //displayChar(characters[0]);
 	}
     
