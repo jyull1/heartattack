@@ -56,7 +56,7 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "Remember how she hurt you last time. Lose fair affection."
+		desc: "Remember how they hurt you last time. Lose fair affection."
 	},
 
 	{
@@ -68,7 +68,7 @@ var templates = [
 		},
 		bools: {},
 		uses: 8,
-		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Dammage"
+		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Damage"
 	},
 
 	{
@@ -94,7 +94,7 @@ var templates = [
 		},
 		bools: {},
 		uses: 4,
-		desc: "Talk in depth about your research project, deals great dammage"
+		desc: "Talk in depth about your research project, deals great damage"
 	},
 
 	{

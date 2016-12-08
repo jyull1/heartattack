@@ -18,6 +18,7 @@ var date = {
 	create: function(){
 		this.activePlayer;
 		this.otherPlayer;
+		this.display = true;
 		//The amount of time each step in the attack sequence takes.
 		this.moveTime = 5000;
 		this.movesChosen = 0;
@@ -26,11 +27,11 @@ var date = {
 
 		this.player1 = new Person({
 			charm: 8,
-			wit: 2,
+			wit: 8,
 			intel: 8,
 			standards: 7,
 			affection: 0,
-			attacks: ["Locally Sourced", "Conversational Shift", "Ex Pictures"]
+			attacks: ["Locally Sourced", "Dorky Laugh", "Science Experiment", "Free IT Advice"]
 		});
 
 		this.player2 = new Person({
@@ -55,12 +56,14 @@ var date = {
 		this.player2.sprite.scale.setTo(0.8);
 		this.player2.sprite.sendToBack();
 
+		//Creates the game's text box
+		this.textbox = new TextBox();
+
 		//Keeps the players on the screen one at a time.
 		this.otherPlayer = this.player1;
 		this.setActivePlayer(this.player2);
 
-		this.textbox = new TextBox();
-		this.textbox.displayText("Hey", 0);
+		this.textbox.displayText("Welcome to the first date! An awkward silence has settled on the room. Choose what to say on the right-hand panel!", 0);
 	},
 
 	update: function(){
@@ -111,6 +114,7 @@ var date = {
 	},
 
 	setActivePlayer: function(player){
+		this.textbox.hide();
 		if(this.activePlayer){
 			this.activePlayer.sprite.sendToBack();
 			this.otherPlayer = this.activePlayer;
@@ -132,8 +136,8 @@ var date = {
 
 		this.activePlayer.hpBar = game.add.group();
 		this.activePlayer.affectionMeter = this.activePlayer.hpBar.create(1890,1895, 'therm_left');
-		this.activePlayer.hpBar.create(3300,1700,'heart_left');
-		this.activePlayer.affectionFill = this.activePlayer.hpBar.create(3430, 1951, 'meter_right');
+		this.activePlayer.hpBar.create(3250,1675,'heart_left');
+		this.activePlayer.affectionFill = this.activePlayer.hpBar.create(3430, 1926, 'meter_right');
 		this.activePlayer.affectionFill.scale.set(this.activePlayer.affection/1000, 1);
 		this.activePlayer.affectionFill.x -= this.activePlayer.affectionFill.width;
 		this.activePlayer.hpBar.scale.set(0.25,0.25);
@@ -143,8 +147,11 @@ var date = {
 	//Currently does not have timeouts associated with it.
 	act: function(){
 		if(this.player1.wit > this.player2.wit){
-			this.player1.nextMove();
-			this.player2.nextMove();
+			this.display = false;
+			this.makeNextMove(this.player1);
+			this.textbox.displayText("First player moved.",0);
+			setTimeout(this.makeNextMove.bind(this, this.player2), this.moveTime);
+			setTimeout(() => {this.display = true;}, this.moveTime*2);
 		}
 		else if(this.player1.wit < this.player2.wit){
 			this.player2.nextMove();
@@ -162,6 +169,12 @@ var date = {
 			}
 		}
 
+	},
+
+	makeNextMove: function(player){
+		this.setActivePlayer(player);
+		this.activePlayer.nextMove();
+		this.textbox.displayText("Player 2 Moved.", 0);
 		this.hpBar();
 	}
 }
