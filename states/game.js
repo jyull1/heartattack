@@ -7,4 +7,4 @@ game.state.add('charMenu', charMenu);
 game.state.add('date', date);
 game.state.add('menu', menuState);
 
-game.state.start('date');
+game.state.start('menu');

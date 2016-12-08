@@ -2,6 +2,8 @@ var characters = [];
 characters.push("Nerd");
 characters.push("Hipster");
 
+var player1, player2;
+var player = 1;
 var textName, textWarn;
 var textDesc;
 var textAttacks;
@@ -28,7 +30,16 @@ function getChar(){
             name:characters[curIndex],
             attacks:selectedMoves
         }
-        console.log(obj);
+        if(player == 1){
+            player1 = obj;
+            player++;
+            selectedMoves = ["test","test","test","test","test","test"];
+            game.state.start('charMenu');
+        }
+        else{
+            player2 = obj;
+            game.state.start('date')
+        };
         return obj;
     }
     return;
@@ -38,7 +49,6 @@ function getChar(){
 function displayChar(charName){
         textName.setText(charName);
         displayMoves(charName);
-    console.log(charName);
         if(charName.toLowerCase() == "nerd"){
             charPic.destroy();
             charPic = game.add.image(595,350,'char1');

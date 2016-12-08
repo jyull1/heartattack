@@ -54,7 +54,7 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var heal = random(50, 100);
-			this.player.changeAffection(-dmg);
+			this.player.changeAffection(-heal);
 		},
 		bools: {},
 		uses: 10,

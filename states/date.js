@@ -31,7 +31,7 @@ var date = {
 			intel: 8,
 			standards: 7,
 			affection: 0,
-			attacks: ["Locally Sourced", "Dorky Laugh", "Science Experiment", "Free IT Advice"]
+			attacks: player1.attacks
 		});
 
 		this.player2 = new Person({
@@ -40,7 +40,7 @@ var date = {
 			intel: 8,
 			standards: 7,
 			affection: 10,
-			attacks: ["Locally Sourced", "Conversational Shift", "Ex Pictures"]
+			attacks: player2.attacks
 		});
 
 		//Make the players "aware" of one another
