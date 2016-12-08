@@ -3,11 +3,7 @@ var menuState = {
 		game.load.image('left', 'Assets/UI/start_screen_left_weapons.png');
 		game.load.image('right', 'Assets/UI/start_screen_right_weapons.png');
 		game.load.image('background', 'Assets/UI/start_screen_bg.png');
-<<<<<<< HEAD
-		game.load.image('logo', 'Assets/UI/logo.png');
-=======
-		game.load.image('logo', 'Assets/heart_attack_logo_fixed.png');
->>>>>>> a0f206256d8b00f972cae736e36580706d532e90
+		game.load.image('logo', 'Assets/new_logo_heartattack.png');
 		game.load.image('black', 'Assets/UI/black.png');
 		game.load.image('button', 'Assets/UI/buttons.png');
 	},
@@ -49,27 +45,14 @@ var menuState = {
 		this.button = game.add.sprite(490,600,'button');
 		game.physics.arcade.enable(this.button);
 		this.button.inputEnabled = true;
-		this.button.events.onInputDown.add(listener, this);
+		this.button.events.onInputDown.add(this.listener, this);
 
 		this.prompt = game.add.text(595, 630, "START", 
             { font: "30px Georgia", fill: "#000000" });
 	},
 
-<<<<<<< HEAD
-	listener:function{
-=======
-	listener:function(){
->>>>>>> a0f206256d8b00f972cae736e36580706d532e90
-		// make main game state call here
-	},
+	listener: function(){
+		game.state.start('charMenu');
+	}
 
 };
-
-// Initialize Phaser, and create a 400px by 490px game
-var game = new Phaser.Game(1280, 720);
-
-// Add the 'mainState' and call it 'main'
-game.state.add('main', menuState); 
-
-// Start the state to actually start the game
-game.state.start('main');
