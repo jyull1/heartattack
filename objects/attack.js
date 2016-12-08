@@ -14,12 +14,14 @@ class Attack {
 	}
 
 	use(){
+		console.log(this);
 		if(this.uses > 0){
 			this.effect();
 			this.uses--;
 		}
 		else{
 			console.log("Attack has already been used too many times!");
+			console.log(this);
 		}
 	}
 }
@@ -199,7 +201,7 @@ var templates = [
 		name: "Vegan",
 		trope: "hipster",
 		effect: function(){
-			this.player.changeCharm(this.player.getCharm);
+			this.player.changeCharm(this.getCharm() * 0.10);
 		},
 		bools: {},
 		uses: 2,
@@ -207,7 +209,7 @@ var templates = [
 	},
 
 	{
-		name: "socally Scourced",
+		name: "Locally Scourced",
 		trope: "hipster",
 		effect: function(){
 			var dmg = random(200, 250);
@@ -229,6 +231,9 @@ var templates = [
 		uses: 4,
 		desc: "Discuss your collection of indie vinyls. Deal fair affection"
 	}
+
+// -------------------------- End Hipster Attacks ------------------------------
+    
 ]
 
 
@@ -245,3 +250,4 @@ function find(name, arr){
 	}
 	return -1;
 }
+
