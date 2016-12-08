@@ -22,6 +22,10 @@ class Attack {
 		else{
 			date.textbox.displayText("This attack has been used too many times!", 0);
 		}
+
+		// if(this.getOpponent().affection >= 1000){
+			
+		// }
 	}
 }
 
@@ -202,7 +206,7 @@ var templates = [
 		trope: "hipster",
 		effect: function(){
 			this.player.changeStandards(1);
-			this.player.changeInteligece(1);
+			this.player.changeIntel(1);
 		},
 		bools: {},
 		uses: 3,
@@ -229,7 +233,7 @@ var templates = [
 		name: "Vegan",
 		trope: "hipster",
 		effect: function(){
-			this.player.getOpponent.changeCharm(-(this.getCharm() * 0.10));
+			this.player.getOpponent.changeCharm(-(thisplayer.getOpponent.getCharm() * 0.10));
 		},
 		bools: {},
 		uses: 2,

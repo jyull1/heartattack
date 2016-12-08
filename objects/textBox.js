@@ -9,7 +9,7 @@ class TextBox{
 		this.fontHeight = 32;
 		this.alpha = 0.5;
 		this.textAlpha = 1;
-		this.characterLimit = 65;
+		this.characterLimit = 64;
 		this.style = { font: `bold ${this.fontHeight}px Arial`, fill: "#ffffff", boundsAlignH: "center", boundsAlignV: "middle" };
 
 		this.writeSpace = game.make.bitmapData(this.width, this.height);
