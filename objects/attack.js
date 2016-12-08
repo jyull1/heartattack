@@ -10,18 +10,17 @@ class Attack {
 		this.uses = obj.uses;
 		this.desc = obj.desc;
 		this.trope = obj.trope;
+		this.useText = obj.useText;
 		this.player = player;
 	}
 
 	use(){
-		console.log(this);
 		if(this.uses > 0){
 			this.effect();
 			this.uses--;
 		}
 		else{
-			console.log("Attack has already been used too many times!");
-			console.log(this);
+			date.textbox.displayText("This attack has been used too many times!", 0);
 		}
 	}
 }
@@ -31,6 +30,7 @@ var templates = [
 	{
 		//The name of the attack. We will use this for lookup in the game.
 		name: "Locally Sourced",
+		trope: 'hipster',
 		//This carries out the in-game effects of the attack. All of it. It will hook into the player's methods;
 		//this.player will be passed in the attack's constructor, so we assume the variable will "be there" when the effect triggers.
 		effect: function(){
@@ -45,7 +45,8 @@ var templates = [
 		//The amount of times the move can be used. Will be decremented every use.
 		uses: 5,
 		//Description the player sees when they mouse over the attack's UI element.
-		desc: "Talk about all the local brands in your pantry - saving the environment is SO endearing! Deal great affection."
+		desc: "Talk about all the local brands in your pantry - saving the environment is SO endearing! Deal great affection.",
+		useText: "Not only will they love you - they'll love your food!"
 	},
 
 
@@ -58,7 +59,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "Remember how they hurt you last time. Lose fair affection."
+		desc: "Remember how they hurt you last time. Lose some affection.",
+		useText: "Well, your heart is bleeding now. You're not sure what you expected."
 	},
 
 	{
@@ -70,7 +72,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 8,
-		desc: "People have been making fun of your laugh for years, but its kinda cute, Moderate Damage"
+		desc: "People have been making fun of your laugh for years, but its kinda cute. Deal moderate affection.",
+		useText: "Wow… that was adorable! Their eyes light up! Have you always been that cute?"
 	},
 
 	{
@@ -88,7 +91,8 @@ var templates = [
 			},
 		bools: {},
 		uses: 5,
-		desc: "Your date is having computer issues, you offer some advice that will help"
+		desc: "Your date is having computer issues, so you offer some advice that MIGHT help.",
+		useText: "Being helpful is such a great quality in a person!"
 	},
 
 	{
@@ -106,7 +110,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 4,
-		desc: "Talk in depth about your research project, deals great damage"
+		desc: "Talk a little too in-depth about your research project. Deals great affection.",
+		useText: "Someone who contributes to the greater good of humanity? They'll practically swoon!"
 	},
 
 	{
@@ -118,7 +123,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 5,
-		desc: "You remove your glasses to clean them and reval your beautiful eyes that were once hidden, does great damage on first use"
+		desc: "You remove your glasses to clean them and reveal your surprisingly beautiful eyes. Deals great affection on first use.",
+		useText: "They blushed! You’re quite the flirt!"
 	},
 
 	{
@@ -126,11 +132,12 @@ var templates = [
 		trope: "nerd",
 		effect: function(){
 			var dmg = random(100, 150);
-			this.player.getOpponent().changeAffection(dmg);
+			this.player.getOpponent().changeAffection(-dmg);
 		},
 		bools: {},
 		uses: 3,
-		desc: "Your emotional depth isn't stellar you block out emotion, raises standards by one and lowers your affection"
+		desc: "You block out all emotion, raising your standards and lowering your affection.",
+		useText: "Love? Does not compute."
 	},
 
 	{
@@ -142,14 +149,15 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "you talk about that new game you have been playing recently, does less damage every other move"
+		desc: "You talk about that new game you have been playing recently. Does fair affection.",
+		useText: "Nate's sure to love this game..."
 	},
 
 	{
 		name: "Tell Joke",
 		trope: "nerd",
 		effect: function(){
-			if (player.getCharm()  > 5){
+			if (this.player.getCharm()  > 5){
 				var dmg = random(100,150);
 			}
 			else{
@@ -159,7 +167,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "You tell a joke to express your humor, charm increases by %5, deals poor affection"
+		desc: "You tell a joke to express your humor. Deals more affection if you have great charm.",
+		useText: "Yikes… A for effort, D for execution."
 	},
 // ---------------------End Nerd Attacks ---------------------------
 // --------------------- Hipster Attacks ---------------------------
@@ -172,7 +181,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "Your small talk is on point!"
+		desc: "Your small talk is on point!",
+		useText: "They're listening. Step one complete."
 	},
 
 	{
@@ -183,11 +193,12 @@ var templates = [
 		},
 		bools: {},
 		uses: 2,
-		desc: "Start talking about an area of your own expertise. Increase charm by 1 stage."
+		desc: "Start talking about an area of your own expertise. Increase charm by 1 stage.",
+		useText: "They seem a little off-put, but they're still following."
 	},
 
 	{
-		name: "Remember who you are",
+		name: "Before It Was Cool",
 		trope: "hipster",
 		effect: function(){
 			this.player.changeStandards(1);
@@ -195,7 +206,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 3,
-		desc: "Sit back and evaluate your trendiness, Earn a 20% bonus to your standards"
+		desc: "Sit back and evaluate your trendiness. Earn a 20% bonus to your standards.",
+		useText: "They're kinda cute, but they don't look like they listen to Porter Robinson."
 	},
 
 	{
@@ -209,30 +221,20 @@ var templates = [
 		},
 		bools: {},
 		uses: 10,
-		desc: "You tell a joke to express your humor, charm increases 5%, you deal poor affection"
+		desc: "You tell a joke to express your humor. Deals more affection if you have great charm.",
+		useText: "Haha! Yes! You are so funny. And sexy."
 	},
 
 	{
 		name: "Vegan",
 		trope: "hipster",
 		effect: function(){
-			this.player.changeCharm(this.getCharm() * 0.10);
+			this.player.getOpponent.changeCharm(-(this.getCharm() * 0.10));
 		},
 		bools: {},
 		uses: 2,
-		desc: "Make the case of Vegan diets' numerous benefits. Decrease your opponents Wit by 10%"
-	},
-
-	{
-		name: "Locally Scourced",
-		trope: "hipster",
-		effect: function(){
-			var dmg = random(200, 250);
-			this.player.changeAffection(dmg);
-		},
-		bools: {},
-		uses: 5,
-		desc: "Talk about all the local brands in your pantry, saving the environment is so endearing! Deals great affection"
+		desc: "Make the case of a Vegan diet's numerous benefits. Decrease your opponents Wit by 10%.",
+		useText: "Ah, yes; the zoned-out look that comes with daydreaming about vegan food. You know it well."
 	},
 
 	{
@@ -244,7 +246,8 @@ var templates = [
 		},
 		bools: {},
 		uses: 4,
-		desc: "Discuss your collection of indie vinyls. Deal fair affection"
+		desc: "Discuss your collection of indie vinyls. Deal fair affection.",
+		useText: "Vinyl just sounds better, okay?!"
 	}
 
 // -------------------------- End Hipster Attacks ------------------------------

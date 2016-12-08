@@ -20,16 +20,16 @@ var date = {
 		this.otherPlayer;
 		this.display = true;
 		//The amount of time each step in the attack sequence takes.
-		this.moveTime = 5000;
+		this.moveTime = 7000;
 		this.movesChosen = 0;
 
 		this.bg = game.add.image(0, 0, 'background');
 
 		this.player1 = new Person({
-			charm: 8,
+			charm: 2,
 			wit: 8,
-			intel: 8,
-			standards: 7,
+			intel: 4,
+			standards: 5,
 			affection: 0,
 			attacks: player1.attacks
 		});
@@ -48,11 +48,21 @@ var date = {
 		this.player1.setOpponent(this.player2);
 
 		//Creates and positions the player sprites.
-		this.player1.sprite = game.add.sprite(150, 145, 'hipster');
+		if(player2.name === 'Nerd'){
+			this.player1.sprite  = game.add.sprite(125, 92, 'nerd');
+		}
+		else{
+			this.player1.sprite = game.add.sprite(150, 145, 'hipster');
+		}
 		this.player1.sprite.scale.setTo(0.8);
 		this.player1.sprite.sendToBack();
 
-		this.player2.sprite  = game.add.sprite(125, 92, 'nerd');
+		if(player1.name === 'Nerd'){
+			this.player2.sprite  = game.add.sprite(125, 92, 'nerd');
+		}
+		else{
+			this.player2.sprite = game.add.sprite(150, 145, 'hipster');
+		}
 		this.player2.sprite.scale.setTo(0.8);
 		this.player2.sprite.sendToBack();
 
@@ -87,7 +97,8 @@ var date = {
 			//If this doesn't make sense, that's great! Just don't touch it with a 10-foot-pole.
 			let buttonConfig = {
 				func: () => {
-					player.nextMove = buttonConfig.attack.use.bind(buttonConfig.attack); //buttonConfig's context must be bound to the attack itself, or using it will fail. Not sure why.
+					player.nextMove = buttonConfig.attack;
+					player.nextMove.use = player.nextMove.use.bind(buttonConfig.attack); //buttonConfig's context must be bound to the attack itself, or using it will fail. Not sure why.
 					this.movesChosen++;
 
 					this.setActivePlayer(this.otherPlayer);
@@ -149,23 +160,31 @@ var date = {
 		if(this.player1.wit > this.player2.wit){
 			this.display = false;
 			this.makeNextMove(this.player1);
-			this.textbox.displayText("First player moved.",0);
 			setTimeout(this.makeNextMove.bind(this, this.player2), this.moveTime);
 			setTimeout(() => {this.display = true;}, this.moveTime*2);
 		}
 		else if(this.player1.wit < this.player2.wit){
-			this.player2.nextMove();
-			this.player1.nextMove();
+			this.display = false;
+			this.makeNextMove(this.player2);
+			setTimeout(this.makeNextMove.bind(this, this.player1), this.moveTime);
+			setTimeout(() => {this.display = true;}, this.moveTime*2);
 		}
 		else{
 			var choice = random(0, 1);
 			if(choice){
-				this.player1.nextMove();
-				this.player2.nextMove();
+				this.display = false;
+				this.makeNextMove(this.player1);
+				setTimeout(this.makeNextMove.bind(this, this.player2), this.moveTime);
+				setTimeout(() => {this.display = true;}, this.moveTime*2);
 			}
 			else{
-				this.player2.nextMove();
-				this.player1.nextMove();
+				this.display = false;
+				this.makeNextMove(this.player2);
+				setTimeout(this.makeNextMove.bind(this, this.player1), this.moveTime);
+				setTimeout(() => {
+					this.display = true; 
+					this.textbox.hide();
+				}, this.moveTime*2);
 			}
 		}
 
@@ -173,8 +192,9 @@ var date = {
 
 	makeNextMove: function(player){
 		this.setActivePlayer(player);
-		this.activePlayer.nextMove();
-		this.textbox.displayText("Player 2 Moved.", 0);
+		this.textbox.displayText(`You used ${player.nextMove.name}!`,0);
+		setTimeout(this.textbox.displayText.bind(this.textbox, player.nextMove.useText,0), this.moveTime/2);
+		this.activePlayer.nextMove.use();
 		this.hpBar();
 	}
 }

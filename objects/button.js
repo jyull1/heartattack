@@ -24,7 +24,9 @@ class Button {
 		if(obj.attack){
 			this.attack = obj.attack;
 			this.buttonImg.events.onInputOver.add(() => {
-				date.textbox.displayText(this.attack.desc, 0);
+				if(date.display){
+					date.textbox.displayText(this.attack.desc, 0);
+				}				
 			});
 		}
 
