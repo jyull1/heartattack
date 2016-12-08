@@ -187,7 +187,7 @@ var templates = [
 	},
 
 	{
-		name: "Remember who you are...",
+		name: "Remember who you are",
 		trope: "hipster",
 		effect: function(){
 			this.player.changeStandards(1);
