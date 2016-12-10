@@ -145,6 +145,9 @@ var date = {
 		this.activePlayer.bg.bringToTop();
 		this.activePlayer.sprite.bringToTop();
 
+		this.textbox = null;
+		this.textbox = new TextBox();
+
 		this.makeUI(player)
 	},
 
