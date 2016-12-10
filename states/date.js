@@ -18,6 +18,7 @@ var date = {
 	create: function(){
 		this.activePlayer;
 		this.otherPlayer;
+		this.winningPlayer;
 		this.display = true;
 		//The amount of time each step in the attack sequence takes.
 		this.moveTime = 7000;
@@ -77,7 +78,13 @@ var date = {
 	},
 
 	update: function(){
-
+		//checks for a winner
+		if(this.winningPlayer == this.player1){
+			this.triggerWin("Player 1");
+		}
+		else if(this.winningPlayer == this.player2){
+			this.triggerWin("Player 2");
+		}
 	},
 
 	makeUI: function(player){
@@ -137,6 +144,7 @@ var date = {
 		this.makeUI(player)
 	},
 
+	//Sets up and styles the health bars of each player.
 	hpBar: function(){
 		this.otherPlayer.hpBar = game.add.group();
 		this.otherPlayer.affectionMeter = this.otherPlayer.hpBar.create(450,225, 'therm_right');
@@ -158,43 +166,57 @@ var date = {
 	//Currently does not have timeouts associated with it.
 	act: function(){
 		if(this.player1.wit > this.player2.wit){
-			this.display = false;
-			this.makeNextMove(this.player1);
-			setTimeout(this.makeNextMove.bind(this, this.player2), this.moveTime);
-			setTimeout(() => {this.display = true;}, this.moveTime*2);
+			this.planRound(this.player1, this.player2);
 		}
 		else if(this.player1.wit < this.player2.wit){
-			this.display = false;
-			this.makeNextMove(this.player2);
-			setTimeout(this.makeNextMove.bind(this, this.player1), this.moveTime);
-			setTimeout(() => {this.display = true;}, this.moveTime*2);
+			this.planRound(this.player2, this.player1);
 		}
 		else{
 			var choice = random(0, 1);
 			if(choice){
-				this.display = false;
-				this.makeNextMove(this.player1);
-				setTimeout(this.makeNextMove.bind(this, this.player2), this.moveTime);
-				setTimeout(() => {this.display = true;}, this.moveTime*2);
+				this.planRound(this.player1, this.player2);
 			}
 			else{
-				this.display = false;
-				this.makeNextMove(this.player2);
-				setTimeout(this.makeNextMove.bind(this, this.player1), this.moveTime);
-				setTimeout(() => {
-					this.display = true; 
-					this.textbox.hide();
-				}, this.moveTime*2);
+				this.planRound(this.player2, this.player1);
 			}
 		}
 
 	},
 
+	//Sets the scheduled timeouts for the moves being made.
+	planRound: function(player1, player2){
+		this.display = false;
+		this.makeNextMove(player1);
+		setTimeout(this.makeNextMove.bind(this, player2), this.moveTime);
+		setTimeout(() => {
+			this.display = true; 
+			this.textbox.hide();
+				}, this.moveTime*2);
+	},
+
+	//Executes a single move
 	makeNextMove: function(player){
 		this.setActivePlayer(player);
 		this.textbox.displayText(`You used ${player.nextMove.name}!`,0);
 		setTimeout(this.textbox.displayText.bind(this.textbox, player.nextMove.useText,0), this.moveTime/2);
 		this.activePlayer.nextMove.use();
 		this.hpBar();
+	},
+
+	triggerWin: function(playerString){
+		var otherPlayer;
+		if(playerString === 'Player 1'){
+			otherPlayer = 'Player 2';
+		}
+		else{
+			otherPlayer = 'Player 1'
+		}
+
+		this.textbox.displayText(`Oh yeeah! ${playerString} wins the day - and the heart! Oh well ${otherPlayer}, better luck next time!`, 0);
+		game.paused = true;
+	},
+
+	setWinner: function(player){
+		this.winningPlayer = player;
 	}
 }

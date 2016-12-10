@@ -23,9 +23,9 @@ class Attack {
 			date.textbox.displayText("This attack has been used too many times!", 0);
 		}
 
-		// if(this.getOpponent().affection >= 1000){
+		if(this.player.getOpponent().affection >= 1000){
 			
-		// }
+		}
 	}
 }
 

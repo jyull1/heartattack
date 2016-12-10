@@ -36,5 +36,11 @@ class Person {
 	changeWit(int){ this.wit += int; }
 	changeIntel(int){ this.intel += int; }
 	changeStandards(int){ this.standards += int; }
-	changeAffection(int){ this.affection += int; }
+	changeAffection(int){ 
+		this.affection += int; 
+		if(this.affection >= 1000){
+			this.affection = 1000;
+			date.setWinner(this.getOpponent());
+		}
+	}
 }
