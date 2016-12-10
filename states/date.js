@@ -13,6 +13,7 @@ var date = {
 		game.load.image('meter_right', 'assets/ui/hpbar_health.png');
 		game.load.image('therm_right', 'assets/ui/hp_therm_right.png');
 		game.load.image('therm_left', 'assets/ui/hp_therm_left.png');
+		game.load.image('background2', 'assets/backgrounds/background_2.png');
 	},
 
 	create: function(){
@@ -24,7 +25,6 @@ var date = {
 		this.moveTime = 7000;
 		this.movesChosen = 0;
 
-		this.bg = game.add.image(0, 0, 'background');
 
 		this.player1 = new Person({
 			charm: 2,
@@ -34,6 +34,7 @@ var date = {
 			affection: 0,
 			attacks: player1.attacks
 		});
+		this.player1.bg = game.add.sprite(0, 0, 'background');
 
 		this.player2 = new Person({
 			charm: 8,
@@ -41,8 +42,9 @@ var date = {
 			intel: 8,
 			standards: 7,
 			affection: 10,
-			attacks: player2.attacks
+			attacks: player2.attacks,
 		});
+		this.player2.bg = game.add.sprite(0, 0,'background2');
 
 		//Make the players "aware" of one another
 		this.player2.setOpponent(this.player1);
@@ -135,10 +137,12 @@ var date = {
 		this.textbox.hide();
 		if(this.activePlayer){
 			this.activePlayer.sprite.sendToBack();
+			this.activePlayer.bg.sendToBack();
 			this.otherPlayer = this.activePlayer;
 		}
 		
 		this.activePlayer = player;
+		this.activePlayer.bg.bringToTop();
 		this.activePlayer.sprite.bringToTop();
 
 		this.makeUI(player)
